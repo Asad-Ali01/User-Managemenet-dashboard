@@ -19,7 +19,8 @@ function UserBasicInfo() {
     queryFn: fetchUsers,
   });
   // User details
-  const { data: UserDetailsData, isLoading: UserDetailsLoading } = UserDetails(rowID);
+  const { data: UserDetailsData, isLoading: UserDetailsLoading } =
+    UserDetails(rowID);
   console.log(data);
   if (isLoading) {
     return (
@@ -47,7 +48,6 @@ function UserBasicInfo() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      
     },
     {
       title: "Email",
@@ -61,32 +61,37 @@ function UserBasicInfo() {
     },
   ];
   return (
-    <div className=" flex flex-col justify-center  h-full">
+    <div className="dark:bg-gray-800 flex flex-col  h-full ">
       <h1 className="font-bold text-xl my-7 mx-2 text-center">
         Click any row to view user details.
       </h1>
       <motion.div
-       initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-      <Table
-        dataSource={dataSource}
-        scroll={{ x: 'max-content' }} // enables horizontal scrolling
-        columns={columns}
-        pagination={{ pageSize: 5 }}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              setisModalOpen(true);
-              console.log(record);
-              setRowID(record.key);
-            },
-            style: { cursor: "pointer" },
-          };
-        }}
-      />
-  </motion.div>
+        <Table
+          dataSource={dataSource}
+          scroll={{ x: "max-content" }} // enables horizontal scrolling
+          columns={columns}
+          pagination={{ pageSize: 5 }}
+          
+         
+        bordered={false}
+          rowClassName={`dark:!bg-gray-700 dark:!border-none dark:!hover:bg-red-400`}
+          onRow={(record) => {
+            return {
+              onClick: () => {
+                setisModalOpen(true);
+                console.log(record);
+                setRowID(record.key);
+              },
+              style: { cursor: "pointer" },
+
+            };
+          }}
+        />
+      </motion.div>
       <Modal
         open={isModalOpen}
         title="User Details"
@@ -94,7 +99,14 @@ function UserBasicInfo() {
         onCancel={() => setisModalOpen(false)}
         cancelButtonProps={{ style: { display: "none" } }}
         centered
-        
+        classNames={{
+          content:
+            "dark:!bg-gray-800 dark:!border-gray-700 dark:!text-white ",
+          header: "dark:!bg-gray-800 dark:!border-gray-700 dark:!text-white",
+          body: "dark:!bg-gray-800 dark:!text-white dark:!scrollbar-thin dark:!scrollbar-thumb-gray-600 dark:!scrollbar-track-gray-900",
+          // footer: "dark:!bg-gray-800 dark:!border-gray-700",
+          mask: "!bg-black/70",
+        }}
         styles={{
           body: {
             maxHeight: "60vh",

@@ -206,29 +206,6 @@
         "catchPhrase": "Centralized empowering task-force",
         "bs": "target end-to-end models"
       }
-    },
-    {
-      "id": "22",
-      "name": "Asad Ali",
-      "username": "aasd",
-      "email": "asadllc255@gmail.com",
-      "address": {
-        "street": "2093A Philadelphia Pike Suite 443 Claymont, DE 19703",
-        "suite": "suite",
-        "city": "Philadelphia",
-        "zipcode": "19703",
-        "geo": {
-          "lat": "39.9523",
-          "lng": "98.7"
-        }
-      },
-      "phone": "8775354216",
-      "website": "myWeb",
-      "company": {
-        "name": "Sentinel Supply Chain LLC",
-        "catchPhrase": "acascascascasca",
-        "bs": "ascascascascascas"
-      }
     }
   ]
 }

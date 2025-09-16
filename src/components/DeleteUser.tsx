@@ -37,10 +37,10 @@ setID("")
   return (
     <div >
         <form className="grid justify-center items-center" onSubmit={handleSubmit}>
-          <div className="flex">
+          <div className="flex gap-2">
 
-        <Input type="text" name="id" value={Id} required onChange={(e) => setID(e.target.value)}   placeholder="Enter id" />
-        <Button type="default" htmlType="submit" loading={Mutation.isPending}>{Mutation.isPending ? "Deleting..." : "Delete"}</Button>
+        <Input type="text" className="dark:!bg-gray-700 dark:placeholder-gray-600 dark:!text-white" name="id" value={Id} required onChange={(e) => setID(e.target.value)}   placeholder="Enter id" />
+        <Button type="default"  htmlType="submit" className="dark:!bg-gray-700" loading={Mutation.isPending}>{Mutation.isPending ? "Deleting..." : "Delete"}</Button>
           </div>
          
         {Mutation.isError && <p >{Mutation.error?.message}</p>}

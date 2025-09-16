@@ -87,10 +87,10 @@ function AddUser() {
    
   };
   return (
-    <div className="mt-12">
+    <div className=" mt-15 sm:mt-0   ">
     <form onSubmit={handleSubmit} className="grid grid-cols-2 mx-12 sm:grid-cols-3   gap-5 ">
       <Input
-        className="border-2 pl-1"
+        className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="id"
         name="id"
         type="text"
@@ -102,7 +102,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="name"
         name="name"
         type="text"
@@ -114,7 +114,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="username"
         name="username"
         type="text"
@@ -126,7 +126,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+           className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="email"
         name="email"
         type="text"
@@ -138,7 +138,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+           className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="street"
         name="street"
         type="text"
@@ -150,7 +150,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="suite"
         name="suite"
         type="text"
@@ -162,7 +162,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="city"
         name="city"
         type="text"
@@ -174,7 +174,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="zipcode"
         name="zipcode"
         type="text"
@@ -186,7 +186,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="lat"
         name="lat"
         type="text"
@@ -198,7 +198,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="lng"
         name="lng"
         type="text"
@@ -210,7 +210,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="phone"
         name="phone"
         type="text"
@@ -222,7 +222,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+           className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="website"
         name="website"
         type="text"
@@ -234,7 +234,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="companyName"
         name="companyName"
         type="text"
@@ -246,7 +246,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1"
+          className="border-2 pl-1 dark:!bg-gray-700 dark:!border-none  dark:!text-white dark:!placeholder-gray-500"
         id="catchPhrase"
         type="text"
         name="catchPhrase"
@@ -258,7 +258,7 @@ function AddUser() {
       />
 
       <Input
-        className="border-2 pl-1 "
+         className="border-2 dark:!border-none pl-1 dark:!bg-gray-700  dark:!text-white dark:!placeholder-gray-500"
         id="bs"
         name="bs"
         type="text"
@@ -270,7 +270,7 @@ function AddUser() {
       />
 
      
-      <Button size="large" type="default" htmlType="submit"  className=" w-30 " loading={mutation.isPending}> {mutation.isPending ? "Adding..." : "Add new user"}</Button>
+      <Button size="large" type="default" htmlType="submit"  className=" w-30 dark:!bg-gray-700" loading={mutation.isPending}> {mutation.isPending ? "Adding..." : "Add new user"}</Button>
       {mutation.isError && <p className="col-span-3">Error: {mutation.error?.message}</p>}
       {mutation.isSuccess && <p className="col-span-3">User added successfully</p>}
     </form>

@@ -10,11 +10,16 @@ import UserBasicInfo from "./components/UserBasicInfo";
 import AddUser from "./components/AddUser";
 import Dashboard from "./components/DashBoard";
 import DeleteUser from "./components/DeleteUser";
+import '@ant-design/v5-patch-for-react-19';
+
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    
     <QueryClientProvider client={queryClient}>
+    
+   
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Router />}>
@@ -27,6 +32,7 @@ createRoot(document.getElementById("root")!).render(
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={true} />
+      
     </QueryClientProvider>
   </StrictMode>
 );
