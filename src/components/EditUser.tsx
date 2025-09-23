@@ -1,11 +1,15 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { userDetails } from "./Interface";
 import axios from "axios";
 import Input from "antd/es/input/Input";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-function AddUser() {
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import {Spin} from 'antd'
+function EditUser() {
+  const { userID } = useParams<{ userID: string }>();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [id, setId] = useState<string>("");
@@ -23,6 +27,7 @@ function AddUser() {
   const [companyName, setCompanyName] = useState<string>("");
   const [catchPhrase, setCatchPhrase] = useState<string>("");
   const [bs, setBs] = useState<string>("");
+
   const resetForm = () => {
     setId("");
     setName("");
@@ -40,22 +45,48 @@ function AddUser() {
     setCatchPhrase("");
     setBs("");
   };
+
+  //   Getting data
+  const fetchUser = async () => {
+    const res = await axios.get(`http://localhost:3000/users/${userID}`);
+    return res.data;
+  };
+  const { isLoading, data } = useQuery({
+    queryKey: ["users", userID],
+    queryFn: fetchUser,
+    enabled: !!userID,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setId(data.id);
+      setName(data.name);
+      setUserName(data.username);
+      setEmail(data.email);
+      setStreet(data.address.street);
+      setSuite(data.address.suite);
+      setCity(data.address.city);
+      setZipCode(data.address.zipcode);
+      setLat(data.address.geo.lat);
+      setLng(data.address.geo.lng);
+      setPhone(data.phone);
+      setWebsite(data.website);
+      setCompanyName(data.company.name);
+      setCatchPhrase(data.company.catchPhrase);
+      setBs(data.company.bs);
+    }
+  }, [data]);
+
   const mutation = useMutation({
-    mutationFn: async (newUser: userDetails) => {
-      const existing = await axios
-        .get(`http://localhost:3000/users/${newUser.id}`)
-        .then((res) => res.data)
-        .catch(() => null);
-      if (existing) {
-        throw new Error("This ID already exists.Please enter another ID.");
-      }
-      return await axios.post("http://localhost:3000/users", newUser);
+    mutationFn: async (updatedUser: userDetails) => {
+        return await axios.put(`http://localhost:3000/users/${userID}`, updatedUser);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       resetForm();
       navigate("/dashboard");
     },
+   
   });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,6 +115,12 @@ function AddUser() {
       },
     });
   };
+  if(isLoading){
+    
+   return ( <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+        <Spin size="large" />
+      </div>)
+  }
   return (
     <div className=" py-5   grid  h-full place-items-center">
       <form
@@ -95,7 +132,7 @@ function AddUser() {
           id="id"
           name="id"
           type="text"
-          value={id}
+          value={data.id || id}
           placeholder="Enter Id"
           size="large"
           required
@@ -107,7 +144,7 @@ function AddUser() {
           id="name"
           name="name"
           type="text"
-          value={name}
+          value={data.name || name}
           placeholder="Enter name"
           size="large"
           required
@@ -127,7 +164,7 @@ function AddUser() {
         />
 
         <Input
-          className="border-2 dark:!border-none pl-1 dark:!bg-gray-700  dark:!text-white  dark:focus:!ring-1 dark:focus:!ring-blue-500 focus:!shadow-none dark:!placeholder-gray-500 dark:focus:!bg-white dark:focus:!text-black dark:focus:caret-black"
+          className="border-2 dark:!border-none pl-1 dark:!bg-gray-700  dark:!text-white  dark:focus:!ring-1 dark:focus:!ring-blue-500 focus:!shadow-none dark:!placeholder-gray-500 dark:focus:!text-black dark:focus:!bg-white dark:focus:caret-black"
           id="email"
           name="email"
           type="text"
@@ -277,18 +314,18 @@ function AddUser() {
           className=" w-30 dark:!bg-gray-700 dark:!text-white dark:hover:!text-blue-500"
           loading={mutation.isPending}
         >
-          {" "}
-          {mutation.isPending ? "Adding..." : "Add new user"}
+          
+          {mutation.isPending ? "Updating..." : "Update user"}
         </Button>
         {mutation.isError && (
           <p className="col-span-3">Error: {mutation.error?.message}</p>
         )}
         {mutation.isSuccess && (
-          <p className="col-span-3">User added successfully</p>
+          <p className="col-span-3">User updated successfully</p>
         )}
       </form>
     </div>
   );
 }
 
-export default AddUser;
+export default EditUser;

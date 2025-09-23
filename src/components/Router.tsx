@@ -1,15 +1,17 @@
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
+import { useState } from "react";
 function Router() {
+   const [isAdmin,setIsAdmin] = useState(localStorage.getItem('admin') === "true")
   return (
     <div className="flex flex-col  h-screen  relative">
-      <Header />
+      <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
     <main className=" h-full dark:text-white dark:bg-gray-500">
 
-      <Outlet />
+      <Outlet context={isAdmin}/>
     </main>
-    <div className="dark:bg-gray-800">
+    <div >
 
       <Footer />
     </div>

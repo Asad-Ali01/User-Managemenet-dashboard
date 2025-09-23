@@ -3,6 +3,7 @@ export interface UserRow{
     name:string
     email:string
     company:string
+    // delete:string
 }
 export interface User{
     id:string

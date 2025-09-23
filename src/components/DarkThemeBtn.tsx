@@ -5,7 +5,7 @@ function DarkThemeBtn() {
   const [isDark,setIsDark] = useState(
     localStorage.getItem("theme") === "dark" ? true : false
   )
-console.log(isDark);
+
 //getting isDark from localStorage
 
 
